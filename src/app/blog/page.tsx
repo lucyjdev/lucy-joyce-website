@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 interface BlogPost {
   id: string;
@@ -8,7 +7,6 @@ interface BlogPost {
   date: string;
   author: string;
   tags: string[];
-  coverImage?: string;
   slug: string;
   category: "tech" | "career" | "learning";
 }
@@ -18,13 +16,12 @@ export default function BlogPage() {
   const blogPosts: BlogPost[] = [
     {
       id: "post1",
-      title: "My Journey: From Career Professional to Software Developer",
+      title: "Rebooting my Career: My Tech Transition Story",
       excerpt:
         "The challenges I faced, lessons learned, and how I successfully transitioned into a tech career as a software developer.",
       date: "April 10, 2025",
       author: "Lucy Joyce",
       tags: ["Career Change", "Tech Journey", "Software Development"],
-      coverImage: "/profile-lucy.jpg",
       slug: "journey-to-software-developer",
       category: "career",
     },
@@ -36,7 +33,6 @@ export default function BlogPage() {
       date: "April 1, 2025",
       author: "Lucy Joyce",
       tags: ["TypeScript", "JavaScript", "Learning Path"],
-      coverImage: "/file.svg",
       slug: "getting-started-with-typescript",
       category: "tech",
     },
@@ -102,45 +98,33 @@ export default function BlogPage() {
       <section className="mb-16">
         <h2 className="text-2xl font-bold mb-8 text-center">Featured Post</h2>
         <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-          <div className="md:flex">
-            <div className="md:shrink-0">
-              <div className="h-48 w-full md:h-full md:w-48 relative">
-                <Image
-                  src={blogPosts[0].coverImage || "/profile-lucy.jpg"}
-                  alt={blogPosts[0].title}
-                  fill
-                  className="object-cover"
-                />
+          <div className="p-8">
+            <div className="uppercase tracking-wide text-sm text-blue-600 font-semibold mb-1">
+              {blogPosts[0].category === "career"
+                ? "Career Change"
+                : blogPosts[0].category === "tech"
+                ? "Technology"
+                : "Learning Path"}
+            </div>
+            <Link
+              href={`/blog/${blogPosts[0].slug}`}
+              className="block mt-1 text-2xl font-bold text-gray-900 hover:text-blue-700 transition-colors"
+            >
+              {blogPosts[0].title}
+            </Link>
+            <p className="mt-2 text-gray-600">{blogPosts[0].excerpt}</p>
+            <div className="mt-4 flex items-center">
+              <div className="text-sm text-gray-500">
+                <p className="font-medium">{blogPosts[0].author}</p>
+                <p>{blogPosts[0].date}</p>
               </div>
             </div>
-            <div className="p-8">
-              <div className="uppercase tracking-wide text-sm text-blue-600 font-semibold mb-1">
-                {blogPosts[0].category === "career"
-                  ? "Career Change"
-                  : blogPosts[0].category === "tech"
-                  ? "Technology"
-                  : "Learning Path"}
-              </div>
-              <Link
-                href={`/blog/${blogPosts[0].slug}`}
-                className="block mt-1 text-2xl font-bold text-gray-900 hover:text-blue-700 transition-colors"
-              >
-                {blogPosts[0].title}
-              </Link>
-              <p className="mt-2 text-gray-600">{blogPosts[0].excerpt}</p>
-              <div className="mt-4 flex items-center">
-                <div className="text-sm text-gray-500">
-                  <p className="font-medium">{blogPosts[0].author}</p>
-                  <p>{blogPosts[0].date}</p>
-                </div>
-              </div>
-              <Link
-                href={`/blog/${blogPosts[0].slug}`}
-                className="mt-4 inline-block text-blue-600 font-medium hover:underline"
-              >
-                Read full article →
-              </Link>
-            </div>
+            <Link
+              href={`/blog/${blogPosts[0].slug}`}
+              className="mt-4 inline-block text-blue-600 font-medium hover:underline"
+            >
+              Read full article →
+            </Link>
           </div>
         </div>
       </section>
@@ -159,16 +143,6 @@ export default function BlogPage() {
                 key={post.id}
                 className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
               >
-                {post.coverImage && (
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={post.coverImage}
-                      alt={post.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                )}
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-3">
                     <Link
@@ -219,16 +193,6 @@ export default function BlogPage() {
                 key={post.id}
                 className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
               >
-                {post.coverImage && (
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={post.coverImage}
-                      alt={post.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                )}
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-3">
                     <Link
@@ -279,16 +243,6 @@ export default function BlogPage() {
                 key={post.id}
                 className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
               >
-                {post.coverImage && (
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={post.coverImage}
-                      alt={post.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                )}
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-3">
                     <Link
