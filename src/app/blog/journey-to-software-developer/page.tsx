@@ -1,7 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import Comments from "@/components/Comments";
 
 export default function TechTransitionBlogPost() {
+  const blogSlug = "journey-to-software-developer";
+
   return (
     <article className="container mx-auto px-4 py-12 max-w-4xl">
       <Link
@@ -512,6 +515,8 @@ export default function TechTransitionBlogPost() {
           Back to all posts
         </Link>
       </div>
+
+      <Comments slug={blogSlug} />
     </article>
   );
 }
