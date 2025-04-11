@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function TechTransitionBlogPost() {
@@ -37,6 +38,22 @@ export default function TechTransitionBlogPost() {
         </div>
       </header>
 
+      <div className="relative h-96 w-full mb-12 rounded-xl overflow-hidden">
+        <Image
+          src="/file.svg"
+          alt="Career transition illustration"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-tr from-blue-700/50 to-purple-700/30 flex items-center justify-center p-6">
+          <p className="text-white text-2xl md:text-3xl font-light max-w-2xl text-center italic">
+            "This blog chronicles my transition from the world of customer
+            relations to the realm of code, highlighting the challenges,
+            triumphs, and lessons learned along the way."
+          </p>
+        </div>
+      </div>
+
       <div className="prose prose-lg max-w-none text-gray-800">
         <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
         <p className="mb-6">
@@ -61,6 +78,17 @@ export default function TechTransitionBlogPost() {
           real-time data from an API—an interesting challenge that fuelled my
           passion.
         </p>
+
+        <div className="flex justify-center my-10">
+          <div className="relative h-64 w-full rounded-lg overflow-hidden">
+            <Image
+              src="/globe.svg"
+              alt="Learning to code illustration"
+              fill
+              className="object-contain bg-gray-100"
+            />
+          </div>
+        </div>
 
         <h2 className="text-2xl font-semibold mt-10 mb-4">
           The Decision to Switch
@@ -111,6 +139,17 @@ export default function TechTransitionBlogPost() {
           all the time I'd invested paid off when I landed my first significant
           developer role at Sahaj Software.
         </p>
+
+        <div className="flex justify-center my-10">
+          <div className="relative h-64 w-full rounded-lg overflow-hidden">
+            <Image
+              src="/window.svg"
+              alt="First developer role illustration"
+              fill
+              className="object-contain bg-gray-50"
+            />
+          </div>
+        </div>
 
         <h2 className="text-2xl font-semibold mt-10 mb-4">
           Diving In Headfirst
@@ -176,15 +215,36 @@ export default function TechTransitionBlogPost() {
           my understanding.
         </p>
 
+        {/* Featured quote with styled blockquote */}
+        <div className="my-16 relative">
+          <blockquote className="text-3xl md:text-4xl font-light italic text-blue-700 leading-relaxed px-10 py-8 border-l-4 border-blue-600 bg-blue-50 rounded-r-lg">
+            <svg
+              className="absolute top-0 left-4 w-16 h-16 text-blue-200 transform -translate-y-1/2"
+              fill="currentColor"
+              viewBox="0 0 32 32"
+            >
+              <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+            </svg>
+            Over time, I gained confidence and reached a point where I started
+            feeling less like a "career changer" and started to feel more like a
+            developer.
+            <svg
+              className="absolute bottom-0 right-4 w-16 h-16 text-blue-200 transform translate-y-1/2 rotate-180"
+              fill="currentColor"
+              viewBox="0 0 32 32"
+            >
+              <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+            </svg>
+          </blockquote>
+        </div>
+
         <p className="mb-6">
-          Over time, I gained confidence and reached a point where I started
-          feeling less like a "career changer" and started to feel more like a
-          developer. Taking my turn leading sprint ceremonies, like stand-ups
-          and reviews, felt daunting at first, but I grew to enjoy them and it
-          really helped my confidence to grow. Testing and PR reviews were great
-          opportunities to learn, helping me sharpen my eye for detail and my
-          coding skills. I was even able to use my background in customer
-          relations to think like a user, focusing on clarity and experience.
+          Taking my turn leading sprint ceremonies, like stand-ups and reviews,
+          felt daunting at first, but I grew to enjoy them and it really helped
+          my confidence to grow. Testing and PR reviews were great opportunities
+          to learn, helping me sharpen my eye for detail and my coding skills. I
+          was even able to use my background in customer relations to think like
+          a user, focusing on clarity and experience.
         </p>
 
         <p className="mb-6">
@@ -206,6 +266,69 @@ export default function TechTransitionBlogPost() {
           technical skills. At Sahaj, the emphasis on trust, curiosity and
           continuous learning creates an environment where growth feels natural.
         </p>
+
+        {/* Timeline visualization of growth */}
+        <div className="relative py-12 px-4 my-10 bg-gray-50 rounded-lg">
+          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-blue-200 transform -translate-x-1/2"></div>
+
+          <div className="relative z-10 mb-12 ml-6 md:ml-0 md:flex">
+            <div className="flex items-center md:w-1/2 md:justify-end md:pr-8">
+              <div className="bg-white p-4 rounded-lg shadow-md">
+                <h3 className="font-semibold text-blue-700">
+                  Beginning the Journey
+                </h3>
+                <p className="text-sm text-gray-600">
+                  Self-doubt, exploration, and first steps
+                </p>
+              </div>
+            </div>
+            <div className="absolute left-1/2 w-6 h-6 rounded-full bg-blue-500 transform -translate-x-1/2"></div>
+          </div>
+
+          <div className="relative z-10 mb-12 ml-6 md:ml-0 md:flex">
+            <div className="md:w-1/2"></div>
+            <div className="absolute left-1/2 w-6 h-6 rounded-full bg-blue-500 transform -translate-x-1/2"></div>
+            <div className="md:w-1/2 md:pl-8">
+              <div className="bg-white p-4 rounded-lg shadow-md">
+                <h3 className="font-semibold text-blue-700">
+                  Diving into Code
+                </h3>
+                <p className="text-sm text-gray-600">
+                  Learning Swift, building projects, expanding skills
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative z-10 mb-12 ml-6 md:ml-0 md:flex">
+            <div className="flex items-center md:w-1/2 md:justify-end md:pr-8">
+              <div className="bg-white p-4 rounded-lg shadow-md">
+                <h3 className="font-semibold text-blue-700">
+                  First Developer Role
+                </h3>
+                <p className="text-sm text-gray-600">
+                  Challenges, mentorship, and growth at Sahaj
+                </p>
+              </div>
+            </div>
+            <div className="absolute left-1/2 w-6 h-6 rounded-full bg-blue-500 transform -translate-x-1/2"></div>
+          </div>
+
+          <div className="relative z-10 ml-6 md:ml-0 md:flex">
+            <div className="md:w-1/2"></div>
+            <div className="absolute left-1/2 w-6 h-6 rounded-full bg-blue-600 transform -translate-x-1/2"></div>
+            <div className="md:w-1/2 md:pl-8">
+              <div className="bg-white p-4 rounded-lg shadow-md border-2 border-blue-500">
+                <h3 className="font-semibold text-blue-700">
+                  Feeling Like a Developer
+                </h3>
+                <p className="text-sm text-gray-600">
+                  Confidence, leadership, and continued learning
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <p className="mb-6">
           Beyond project work, the learning opportunities at Sahaj have been
@@ -240,9 +363,47 @@ export default function TechTransitionBlogPost() {
           picking up tips from colleagues has been invaluable.
         </p>
 
+        <div className="flex justify-center my-10">
+          <div className="relative h-72 w-full rounded-lg overflow-hidden">
+            <Image
+              src="/profile-lucy.jpg"
+              alt="Lucy Joyce - Software Developer"
+              fill
+              className="object-cover"
+            />
+          </div>
+        </div>
+
         <h2 className="text-2xl font-semibold mt-10 mb-4">
           Overcoming Challenges: Mindset and Personal Growth
         </h2>
+
+        {/* Two-column section for challenges and solutions */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8 bg-gray-50 p-6 rounded-lg">
+          <div>
+            <h3 className="font-semibold text-red-600 mb-4">Challenges</h3>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>Starting over in a new industry</li>
+              <li>Feeling like a beginner again</li>
+              <li>Comparing progress to experienced developers</li>
+              <li>Setting unrealistic expectations</li>
+              <li>Being my own harshest critic</li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-green-600 mb-4">
+              How I Overcame Them
+            </h3>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>Recognizing transferable skills from previous roles</li>
+              <li>Support from mentors and colleagues</li>
+              <li>Being kinder to myself</li>
+              <li>Challenging self-criticism</li>
+              <li>Embracing not knowing all the answers</li>
+            </ul>
+          </div>
+        </div>
+
         <p className="mb-6">
           If I had to name my biggest challenge over the past two years, it
           wouldn't be a technical problem—it would be my own mindset.
@@ -296,12 +457,15 @@ export default function TechTransitionBlogPost() {
           power of asking for help.
         </p>
 
-        <p className="mb-6">
-          Looking back, I'm proud of how far I've come—and even more excited
-          about what's ahead. I feel more confident in my skills, more connected
-          to the tech community, and more inspired than ever to keep learning
-          and growing. I can't wait to see where this path leads next.
-        </p>
+        <div className="bg-blue-50 border-l-4 border-blue-500 p-6 my-8 rounded-r-lg">
+          <p className="text-lg font-medium text-blue-800">
+            Looking back, I'm proud of how far I've come—and even more excited
+            about what's ahead. I feel more confident in my skills, more
+            connected to the tech community, and more inspired than ever to keep
+            learning and growing. I can't wait to see where this path leads
+            next.
+          </p>
+        </div>
       </div>
 
       <div className="mt-16 py-8 border-t">

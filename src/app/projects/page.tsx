@@ -20,7 +20,7 @@ export default function ProjectsPage() {
       description:
         "A full-stack e-commerce platform with user authentication, product management, cart functionality, and payment processing.",
       technologies: ["React", "Node.js", "Express", "MongoDB", "Stripe"],
-      imageUrl: "/placeholder.png",
+      imageUrl: "/file.svg", // Changed from placeholder.png
       projectUrl: "#",
       githubUrl: "https://github.com/yourusername/ecommerce-project",
     },
@@ -30,7 +30,7 @@ export default function ProjectsPage() {
       description:
         "A responsive task management application with drag-and-drop functionality, user authentication, and real-time updates.",
       technologies: ["React", "TypeScript", "Firebase", "TailwindCSS"],
-      imageUrl: "/placeholder.png",
+      imageUrl: "/file.svg", // Changed from placeholder.png
       projectUrl: "#",
       githubUrl: "https://github.com/yourusername/task-management",
     },
@@ -40,7 +40,7 @@ export default function ProjectsPage() {
       description:
         "A weather dashboard that displays current and forecast weather data for any location using a third-party weather API.",
       technologies: ["JavaScript", "HTML", "CSS", "OpenWeatherAPI"],
-      imageUrl: "/placeholder.png",
+      imageUrl: "/file.svg", // Changed from placeholder.png
       projectUrl: "#",
       githubUrl: "https://github.com/yourusername/weather-dashboard",
     },
@@ -50,7 +50,7 @@ export default function ProjectsPage() {
       description:
         "A blog platform built with Next.js and TypeScript featuring markdown support, comment system, and search functionality.",
       technologies: ["Next.js", "TypeScript", "TailwindCSS", "Markdown"],
-      imageUrl: "/placeholder.png",
+      imageUrl: "/file.svg", // Changed from placeholder.png
       projectUrl: "#",
       githubUrl: "https://github.com/yourusername/personal-blog",
     },

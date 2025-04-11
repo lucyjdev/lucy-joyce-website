@@ -26,6 +26,18 @@ export default function BlogPage() {
       category: "career",
     },
     {
+      id: "post6",
+      title:
+        "From Theory to Practice: What I Learned in My First Year as a Developer",
+      excerpt:
+        "Reflecting on my first year working as a software developer, the projects I contributed to, and how my previous career experience helped me succeed.",
+      date: "April 5, 2025",
+      author: "Lucy Joyce",
+      tags: ["Career Development", "Real Projects", "Lessons Learned"],
+      slug: "first-year-as-developer",
+      category: "career",
+    },
+    {
       id: "post2",
       title: "Getting Started with TypeScript: A Career Changer's Perspective",
       excerpt:
