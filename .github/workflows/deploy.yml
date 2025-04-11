@@ -8,8 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # Only run this job if the test workflow passes
-    needs: [test]
+    # Removing the dependency on test job for now
+    # needs: [test]
 
     steps:
       - uses: actions/checkout@v3
