@@ -97,7 +97,7 @@ export default function CertificatesPage() {
   return (
     <main className="container mx-auto px-4 py-12">
       <h1 className="text-4xl font-bold mb-8 text-center">
-        My Education & Certificates
+        Software Development Learning Journey
       </h1>
 
       <div className="max-w-3xl mx-auto mb-8">
