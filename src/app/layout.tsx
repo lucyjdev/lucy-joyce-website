@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CoderThemeWrapper from "@/components/CoderThemeWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "My Personal Portfolio",
+  title: "Lucy Joyce | Developer Portfolio",
   description:
     "Personal portfolio showcasing my software development projects, certificates, and blogs",
 };
@@ -31,7 +32,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
         <Navbar />
-        <div className="pt-16 flex-grow">{children}</div>
+        <div className="pt-16 flex-grow">
+          <CoderThemeWrapper>{children}</CoderThemeWrapper>
+        </div>
         <Footer />
       </body>
     </html>
