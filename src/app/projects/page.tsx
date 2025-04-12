@@ -14,6 +14,7 @@ interface Project {
   projectUrl?: string;
   githubUrl?: string;
   imageObjectPosition?: string;
+  isWeatherApp?: boolean;
 }
 
 export default function ProjectsPage() {
@@ -55,7 +56,7 @@ export default function ProjectsPage() {
       imageUrl: "/weather-app-1.png",
       projectUrl: "https://hardcore-varahamihira-b12763.netlify.app/",
       githubUrl: "https://github.com/yourusername/weather-dashboard",
-      imageObjectPosition: "center 40%",
+      isWeatherApp: true,
     },
     {
       id: "project4",
@@ -66,7 +67,7 @@ export default function ProjectsPage() {
       imageUrl: "/weather-app-2.png",
       projectUrl: "https://sleepy-panini-bdebb2.netlify.app/",
       githubUrl: "https://github.com/yourusername/personal-blog",
-      imageObjectPosition: "center 60%",
+      isWeatherApp: true,
     },
   ];
 
@@ -123,10 +124,16 @@ export default function ProjectsPage() {
                     src={project.imageUrl}
                     alt={project.title}
                     fill
-                    className="transition-all duration-500 hover:scale-105"
+                    className={`transition-all duration-500 ${
+                      project.isWeatherApp
+                        ? "weather-forecast-image"
+                        : "hover:scale-105"
+                    }`}
                     style={{
-                      objectFit: "cover",
-                      objectPosition: project.imageObjectPosition || "center",
+                      objectFit: project.isWeatherApp ? "contain" : "cover",
+                      objectPosition: project.isWeatherApp
+                        ? "bottom"
+                        : project.imageObjectPosition || "center",
                     }}
                   />
                 ) : (
