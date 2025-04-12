@@ -9,6 +9,7 @@ interface Project {
   imageUrl?: string;
   projectUrl?: string;
   githubUrl?: string;
+  imageObjectPosition?: string; // Added this property to control image focus
 }
 
 export default function ProjectsPage() {
@@ -20,7 +21,7 @@ export default function ProjectsPage() {
       description:
         "A full-stack e-commerce platform with user authentication, product management, cart functionality, and payment processing.",
       technologies: ["React", "Node.js", "Express", "MongoDB", "Stripe"],
-      imageUrl: "/file.svg", // Changed from placeholder.png
+      imageUrl: "/file.svg",
       projectUrl: "#",
       githubUrl: "https://github.com/yourusername/ecommerce-project",
     },
@@ -30,29 +31,38 @@ export default function ProjectsPage() {
       description:
         "A responsive task management application with drag-and-drop functionality, user authentication, and real-time updates.",
       technologies: ["React", "TypeScript", "Firebase", "TailwindCSS"],
-      imageUrl: "/file.svg", // Changed from placeholder.png
+      imageUrl: "/file.svg",
       projectUrl: "#",
       githubUrl: "https://github.com/yourusername/task-management",
     },
     {
       id: "project3",
+      title: "React Weather Dashboard",
+      description:
+        "A weather dashboard built with React that displays current and forecast weather data for any location using a third-party weather API.",
+      technologies: [
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "OpenWeatherAPI",
+        "React",
+        "Bootstrap",
+      ],
+      imageUrl: "/weather-app-1.png",
+      projectUrl: "https://hardcore-varahamihira-b12763.netlify.app/",
+      githubUrl: "https://github.com/yourusername/weather-dashboard",
+      imageObjectPosition: "center 40%", // Focus on the forecast section
+    },
+    {
+      id: "project4",
       title: "Weather Dashboard",
       description:
         "A weather dashboard that displays current and forecast weather data for any location using a third-party weather API.",
       technologies: ["JavaScript", "HTML", "CSS", "OpenWeatherAPI"],
-      imageUrl: "/file.svg", // Changed from placeholder.png
-      projectUrl: "#",
-      githubUrl: "https://github.com/yourusername/weather-dashboard",
-    },
-    {
-      id: "project4",
-      title: "Personal Blog",
-      description:
-        "A blog platform built with Next.js and TypeScript featuring markdown support, comment system, and search functionality.",
-      technologies: ["Next.js", "TypeScript", "TailwindCSS", "Markdown"],
-      imageUrl: "/file.svg", // Changed from placeholder.png
-      projectUrl: "#",
+      imageUrl: "/weather-app-2.png",
+      projectUrl: "https://sleepy-panini-bdebb2.netlify.app/",
       githubUrl: "https://github.com/yourusername/personal-blog",
+      imageObjectPosition: "center 60%", // Focus on the lower part with forecast
     },
   ];
 
@@ -79,7 +89,10 @@ export default function ProjectsPage() {
                   src={project.imageUrl}
                   alt={project.title}
                   fill
-                  style={{ objectFit: "cover" }}
+                  style={{
+                    objectFit: "cover",
+                    objectPosition: project.imageObjectPosition || "center",
+                  }}
                 />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center text-gray-500">
