@@ -10,8 +10,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    # Only run tests on PR or when manually triggered
-    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+    # Run tests on PR, push to main, or when manually triggered
+    if: github.event_name == 'pull_request' || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
 
     env:
       DATABASE_URL: "file:./test.db?connection_limit=1"
@@ -39,10 +39,12 @@ jobs:
       - name: Run tests
         run: npm test
 
-  deploy:
+  build_check:
     runs-on: ubuntu-latest
-    # Only run deploy on push to main or when manually triggered
+    # Run build check on push to main or when manually triggered
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    # Run this job after the test job
+    needs: [test]
 
     steps:
       - uses: actions/checkout@v3
@@ -62,13 +64,42 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # This is a placeholder - replace with your actual deployment steps
-      # For example, if using Vercel:
-      # - name: Deploy to Vercel
-      #   uses: amondnet/vercel-action@v25
-      #   with:
-      #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-      #     vercel-args: '--prod'
+      - name: Skip Deployment
+        run: echo "Deployment is temporarily skipped. Build verification complete."
+
+  # Commented out deploy job to skip it while keeping the configuration
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   # Only run deploy on push to main or when manually triggered
+  #   if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+  #   # Run this job after the test job
+  #   needs: [test]
+  #
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: "18"
+  #         cache: "npm"
+  #
+  #     - name: Install dependencies
+  #       run: npm ci
+  #
+  #     - name: Generate Prisma client
+  #       run: npx prisma generate
+  #
+  #     - name: Build project
+  #       run: npm run build
+  #
+  #     # This is a placeholder - replace with your actual deployment steps
+  #     # For example, if using Vercel:
+  #     # - name: Deploy to Vercel
+  #     #   uses: amondnet/vercel-action@v25
+  #     #   with:
+  #     #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
+  #     #     github-token: ${{ secrets.GITHUB_TOKEN }}
+  #     #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+  #     #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+  #     #     vercel-args: '--prod'
