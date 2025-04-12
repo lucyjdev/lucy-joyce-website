@@ -5,6 +5,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Add an environment variable to control skipping
+env:
+  SKIP_WORKFLOWS: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,24 +16,38 @@ jobs:
     # needs: [test]
 
     steps:
+      # Add a check for skipping at the beginning
+      - name: Check if workflow should be skipped
+        if: ${{ env.SKIP_WORKFLOWS == 'true' }}
+        run: |
+          echo "Skipping deployment workflow as configured"
+          exit 0
+
+      # Continue with normal steps if not skipped
       - uses: actions/checkout@v3
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
 
       - name: Setup Node.js
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         uses: actions/setup-node@v3
         with:
           node-version: "18"
           cache: "npm"
 
       - name: Install dependencies
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         run: npm ci
 
       - name: Generate Prisma client
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         run: npx prisma generate
 
       - name: Build project
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         run: npm run build
 
       - name: Skip Deployment
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         run: echo "Deployment step is currently skipped but build checks have passed"
 
       # This is a placeholder - replace with your actual deployment steps
