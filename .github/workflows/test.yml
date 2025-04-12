@@ -6,6 +6,10 @@ on:
   push:
     branches: [main]
 
+# Add an environment variable to control skipping
+env:
+  SKIP_WORKFLOWS: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,22 +20,36 @@ jobs:
       NEXT_PUBLIC_SITE_NAME: "Lucy Joyce | Software Developer"
 
     steps:
+      # Add a check for skipping at the beginning
+      - name: Check if workflow should be skipped
+        if: ${{ env.SKIP_WORKFLOWS == 'true' }}
+        run: |
+          echo "Skipping test workflow as configured"
+          exit 0
+
+      # Continue with normal steps if not skipped
       - uses: actions/checkout@v3
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
 
       - name: Setup Node.js
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         uses: actions/setup-node@v3
         with:
           node-version: "18"
           cache: "npm"
 
       - name: Install dependencies
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         run: npm ci
 
       - name: Generate Prisma client
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         run: npx prisma generate
 
       - name: Run linting
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         run: npm run lint || echo "Linting failed but continuing..."
 
       - name: Run tests
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         run: npm test

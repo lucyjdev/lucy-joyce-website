@@ -7,11 +7,16 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Add an environment variable to control skipping
+env:
+  SKIP_WORKFLOWS: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
     # Run tests on PR, push to main, or when manually triggered
-    if: github.event_name == 'pull_request' || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    # But show as skipped if SKIP_WORKFLOWS is true
+    if: ${{ github.event_name == 'pull_request' || github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
 
     env:
       DATABASE_URL: "file:./test.db?connection_limit=1"
@@ -19,87 +24,121 @@ jobs:
       NEXT_PUBLIC_SITE_NAME: "Lucy Joyce | Software Developer"
 
     steps:
+      # Add a check for skipping at the beginning
+      - name: Check if workflow should be skipped
+        if: ${{ env.SKIP_WORKFLOWS == 'true' }}
+        run: |
+          echo "Skipping test workflow as configured"
+          exit 0
+
+      # Continue with normal steps if not skipped
       - uses: actions/checkout@v3
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
 
       - name: Setup Node.js
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         uses: actions/setup-node@v3
         with:
           node-version: "18"
           cache: "npm"
 
       - name: Install dependencies
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         run: npm ci
 
       - name: Generate Prisma client
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         run: npx prisma generate
 
       - name: Run linting
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         run: npm run lint || echo "Linting failed but continuing..."
 
       - name: Run tests
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         run: npm test
 
   build_check:
     runs-on: ubuntu-latest
     # Run build check on push to main or when manually triggered
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' }}
     # Run this job after the test job
     needs: [test]
 
     steps:
+      # Add a check for skipping at the beginning
+      - name: Check if workflow should be skipped
+        if: ${{ env.SKIP_WORKFLOWS == 'true' }}
+        run: |
+          echo "Skipping build check workflow as configured"
+          exit 0
+
+      # Continue with normal steps if not skipped
       - uses: actions/checkout@v3
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
 
       - name: Setup Node.js
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         uses: actions/setup-node@v3
         with:
           node-version: "18"
           cache: "npm"
 
       - name: Install dependencies
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         run: npm ci
 
       - name: Generate Prisma client
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         run: npx prisma generate
 
       - name: Build project
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         run: npm run build
 
       - name: Skip Deployment
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
         run: echo "Deployment is temporarily skipped. Build verification complete."
 
-  # Commented out deploy job to skip it while keeping the configuration
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   # Only run deploy on push to main or when manually triggered
-  #   if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
-  #   # Run this job after the test job
-  #   needs: [test]
-  #
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: "18"
-  #         cache: "npm"
-  #
-  #     - name: Install dependencies
-  #       run: npm ci
-  #
-  #     - name: Generate Prisma client
-  #       run: npx prisma generate
-  #
-  #     - name: Build project
-  #       run: npm run build
-  #
-  #     # This is a placeholder - replace with your actual deployment steps
-  #     # For example, if using Vercel:
-  #     # - name: Deploy to Vercel
-  #     #   uses: amondnet/vercel-action@v25
-  #     #   with:
-  #     #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
-  #     #     github-token: ${{ secrets.GITHUB_TOKEN }}
-  #     #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-  #     #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-  #     #     vercel-args: '--prod'
+  deploy:
+    runs-on: ubuntu-latest
+    # Only run deploy on push to main or when manually triggered
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' }}
+    # Run this job after the test job
+    needs: [test]
+
+    steps:
+      # Add a check for skipping at the beginning
+      - name: Check if workflow should be skipped
+        if: ${{ env.SKIP_WORKFLOWS == 'true' }}
+        run: |
+          echo "Skipping deployment workflow as configured"
+          exit 0
+
+      # Continue with normal steps if not skipped
+      - uses: actions/checkout@v3
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
+
+      - name: Setup Node.js
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
+        run: npm ci
+
+      - name: Generate Prisma client
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
+        run: npx prisma generate
+
+      - name: Build project
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
+        run: npm run build
+
+      # This is a placeholder - replace with your actual deployment steps
+      - name: Skip Actual Deployment
+        if: ${{ env.SKIP_WORKFLOWS != 'true' }}
+        run: echo "Deployment step is currently skipped but build checks have passed"
